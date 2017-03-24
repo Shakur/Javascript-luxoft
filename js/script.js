@@ -20,30 +20,36 @@ function League(division, teams) {
 
 }
 
-function displayLeagueTable() {
-    //var tableLeague = "<table class='table'><caption>Optional table caption.</caption>";
-    //var tableLeagueHeader = "<thead><tr><th></th>";
-    //for (var prop of teams) {
-    //    tableLeagueHeader += "<th>" + prop.getName() + "</th>";
-    //}
-    //tableLeagueHeader += "</tr></thead>";
-    //var tableLeagueBody = "<tbody>";
-    //for (var prop of teams) {
-    //    tableLeagueBody += "<tr><th scope='row'>" + prop.getName() + "</th></tr>";
-    //}
-    //tableLeagueBody += "</tbody>";
-    //document.getElementById("league-table").innerHTML = tableLeague + tableLeagueHeader + tableLeagueBody + "</table>";
+function displayLeagueTable(teams) {
+    var tableLeague = "<table class='table'><caption>Optional table caption.</caption>";
+    var tableLeagueHeader = "<thead><tr><th></th>";
+    for (var prop of teams) {
+        tableLeagueHeader += "<th>" + prop.getName() + "</th>";
+    }
+    tableLeagueHeader += "</tr></thead>";
+    var tableLeagueBody = "<tbody>";
+    for (var prop of teams) {
+        tableLeagueBody += "<tr><th scope='row'>" + prop.getName() + "</th></tr>";
+    }
+    tableLeagueBody += "</tbody>";
+    document.getElementById("league-table").innerHTML = tableLeague + tableLeagueHeader + tableLeagueBody + "</table>";
 }
 
 function displayLeagueOptions() {
     var leagues = createLeagues();
-    var leagueOptions = "";
-    var elem = document.createElement("li");
-    elem.href = "#";
-    elem.onclick = displayLeagueOptions(league);
+    var li;
+    var link;
     for (var league of leagues) {
-        leagueOptions += "<li><a href='#' onclick='displayLeagueTable()'>"
-            + league.getDivision() + "</a></li>";
+        li = document.createElement("li");
+        link = document.createElement("a");
+        link.href = "#";
+        link.onclick = displayLeagueTable(league.getTeams());
+        var aText = document.createTextNode(league.getDivision());
+        link.appendChild(aText);
+        li.appendChild(link);
+        document.getElementById("leagues").appendChild(li);
+        //li.push(li);
+        //leagueOptions += "<li><link href='#' onclick='displayLeagueTable()'>"
+        //    + league.getDivision() + "</link></li>";
     }
-    document.getElementById("leagues").innerHTML = leagueOptions;
 }
