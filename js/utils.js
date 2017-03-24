@@ -1,9 +1,15 @@
-function generateTeams() {
+function createTeams(names) {
     var teams = [];
-    teams.push(new Team("Juventus"));
-    teams.push(new Team("Barcelona"));
-    teams.push(new Team("Arsenal"));
-    teams.push(new Team("Borussia"));
+    for (name in names) {
+        teams.push(new Team(name));
+    }
 
     return teams;
+}
+
+function createLeagues() {
+    var leagues = [];
+    leagues.push(new League("Gold", createTeams("Juventus", "Barcelona", "Arsenal", "Borussia")));
+
+    return leagues;
 }

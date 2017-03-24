@@ -6,8 +6,8 @@ function Team(name) {
     }
 }
 
-function League(teams) {
-    var _division;
+function League(division, teams) {
+    var _division = division;
     var _teams = teams;
 
     this.getDivision = function () {
@@ -21,42 +21,29 @@ function League(teams) {
 }
 
 function displayLeagueTable() {
-    var tableLeagueDiv = document.getElementById("league-table");
-    var teams = generateTeams();
-    var tableLeague = '<table class="table">
-    <caption>Optional table caption.</caption>
-    <thead>
-    <tr>
-    <th>#</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Username</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-    <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-    <th scope="row">3</th>cd6y5y
-        <td>Larry</td>
-        <td>thю/===ъ
+    //var tableLeague = "<table class='table'><caption>Optional table caption.</caption>";
+    //var tableLeagueHeader = "<thead><tr><th></th>";
+    //for (var prop of teams) {
+    //    tableLeagueHeader += "<th>" + prop.getName() + "</th>";
+    //}
+    //tableLeagueHeader += "</tr></thead>";
+    //var tableLeagueBody = "<tbody>";
+    //for (var prop of teams) {
+    //    tableLeagueBody += "<tr><th scope='row'>" + prop.getName() + "</th></tr>";
+    //}
+    //tableLeagueBody += "</tbody>";
+    //document.getElementById("league-table").innerHTML = tableLeague + tableLeagueHeader + tableLeagueBody + "</table>";
+}
 
-    for (var i = 0; i < teams.length; ++i) {
-
+function displayLeagueOptions() {
+    var leagues = createLeagues();
+    var leagueOptions = "";
+    var elem = document.createElement("li");
+    elem.href = "#";
+    elem.onclick = displayLeagueOptions(league);
+    for (var league of leagues) {
+        leagueOptions += "<li><a href='#' onclick='displayLeagueTable()'>"
+            + league.getDivision() + "</a></li>";
     }
-
-
-
-
-
+    document.getElementById("leagues").innerHTML = leagueOptions;
 }

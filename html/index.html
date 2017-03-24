@@ -76,13 +76,12 @@
             <p>
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="true">
+                        aria-haspopup="true" aria-expanded="true" onclick=displayLeagueOptions()>
                     Choose League
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">League 1</a></li>
-                    <li><a href="#">League 2</a></li>
+                <ul id="leagues" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
                 </ul>
             </div>
             </p>
@@ -98,6 +97,7 @@
 </div>
 
 <script src="../js/jquery-3.2.0.js"></script>
+<script src="../js/utils.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/bootstrap.js"></script>
 </body>
