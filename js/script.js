@@ -1,9 +1,9 @@
-function Team(name) {
+function Team(name, points) {
     var _name = name;
     var _win;
     var _lose;
     var _draw;
-    var _points;
+    var _points = points;
     var _goals;
 
     this.getName = function () {
@@ -11,28 +11,41 @@ function Team(name) {
     }
 
     this.getWin = function () {
-        return _win;
+        return _win || 0;
+    }
+
+    this.setWin = function (win) {
+        _win = win;
     }
 
     this.getLose = function () {
-        return _lose;
+        return _lose || 0;
+    }
+
+    this.setLose = function (lose) {
+        _lose = lose;
     }
 
     this.getDraw = function () {
-        return _draw;
+        return _draw || 0;
+    }
+
+    this.setDraw = function (draw) {
+        _draw = draw;
     }
 
     this.getPoints = function () {
         return _points;
     }
 
+    this.setPoints = function (points) {
+        _points = points;
+    }
+
     this.getGoals = function () {
         return _goals;
     }
 
-    this.setPoints = function (points) {
-        _points = points;
-    }
 
 }
 
@@ -77,22 +90,70 @@ function createLeagueTable(teams) {
     document.getElementById("league-table").appendChild(table);
 }
 
+function createImage() {
+    var td = document.createElement("td");
+    var img = document.createElement("img");
+    img.src = "../img/icon.png";
+    img.width = 30;
+    img.height = 30;
+    td.appendChild(img);
+
+    return td;
+}
 var createContent = function() {
     var gameProcessor = new GameProcessor();
     var teams = gameProcessor.process(createGames());
     var tbody = document.createElement("tbody");
     for (var i = 0; i < teams.length; ++i) {
         var text = document.createTextNode(i + 1);
-        var trBody = document.createElement("tr");
-        var thBody = document.createElement("th");
-        thBody.scope = "row";
-        thBody.appendChild(text);
-        trBody.appendChild(thBody);
-        thBody = document.createElement("th");
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.scope = "row";
+        th.appendChild(text);
+        tr.appendChild(th);
+        th = document.createElement("th");
         text = document.createTextNode(teams[i].getName());
-        thBody.appendChild(text);
-        trBody.appendChild(thBody);
-        tbody.appendChild(trBody);
+        th.appendChild(text);
+        tr.appendChild(th);
+        var td = document.createElement("td");
+        if (i == 0) {
+            td = addImage();
+        }
+        tr.appendChild(td);
+        var td = document.createElement("td");
+        if (i == 1) {
+            td = addImage();
+        }
+        tr.appendChild(td);
+        var td = document.createElement("td");
+        if (i == 2) {
+            td = addImage();
+        }
+        tr.appendChild(td);
+        var td = document.createElement("td");
+        if (i == 3) {
+            td = addImage();
+        }
+        tr.appendChild(td);
+        var td = document.createElement("td");
+        text = document.createTextNode(teams[i].getWin());
+        td.appendChild(text);
+        tr.appendChild(td);
+        td = document.createElement("td");
+        text = document.createTextNode(teams[i].getDraw());
+        td.appendChild(text);
+        tr.appendChild(td);
+        td = document.createElement("td");
+        text = document.createTextNode(teams[i].getLose());
+        td.appendChild(text);
+        tr.appendChild(td);
+        td = document.createElement("td");
+        tr.appendChild(td);
+        td = document.createElement("td");
+        text = document.createTextNode(teams[i].getPoints());
+        td.append(text);
+        tr.appendChild(td);
+        tbody.appendChild(tr);
     }
 
     return tbody;
@@ -109,7 +170,6 @@ var createHeaders = function(teams) {
         thHead.appendChild(text);
         trHead.appendChild(thHead);
     }
-    thead.appendChild(createHeader(trHead, "Games"));
     thead.appendChild(createHeader(trHead, "W"))
     thead.appendChild(createHeader(trHead, "D"));
     thead.appendChild(createHeader(trHead, "L"));
