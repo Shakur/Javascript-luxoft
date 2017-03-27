@@ -77,7 +77,4 @@ function GameProcessor() {
         return sortByPoints(teams);
     }
 
-    function findTeam(team) {
-        return team.getName() == name;
-    }
 }
